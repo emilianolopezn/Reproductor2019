@@ -10,15 +10,16 @@
         <TextBlock HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" Text="Archivo:" VerticalAlignment="Top"/>
         <TextBox x:Name="txtRutaArchivo" HorizontalAlignment="Left" Height="23" Margin="10,31,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="509"/>
         <Button x:Name="btnElegirArchivo" Content="Examinar" HorizontalAlignment="Left" Margin="524,34,0,0" VerticalAlignment="Top" Width="75" Click="btnElegirArchivo_Click"/>
-        <Button x:Name="btnReproducir" Content="Reproducir" HorizontalAlignment="Left" Margin="10,59,0,0" VerticalAlignment="Top" Width="75"/>
-        <Button x:Name="btnPausa" Content="Pausa" HorizontalAlignment="Left" Margin="90,59,0,0" VerticalAlignment="Top" Width="75"/>
-        <Button x:Name="btnDetener" Content="Detener" HorizontalAlignment="Left" Margin="170,59,0,0" VerticalAlignment="Top" Width="75"/>
+        <Button x:Name="btnReproducir" Content="Reproducir" HorizontalAlignment="Left" Margin="10,59,0,0" VerticalAlignment="Top" Width="75" Click="btnReproducir_Click"/>
+        <Button x:Name="btnPausa" Content="Pausa" HorizontalAlignment="Left" Margin="90,59,0,0" VerticalAlignment="Top" Width="75" Click="btnPausa_Click" IsEnabled="False"/>
+        <Button x:Name="btnDetener" Content="Detener" HorizontalAlignment="Left" Margin="170,59,0,0" VerticalAlignment="Top" Width="75" IsEnabled="False" Click="btnDetener_Click"/>
         <Slider x:Name="sldReproduccion" HorizontalAlignment="Left" Margin="10,84,0,0" VerticalAlignment="Top" Width="509"/>
         <TextBlock x:Name="lblTiempoActual" HorizontalAlignment="Left" Margin="10,107,0,0" TextWrapping="Wrap" Text="00:00" VerticalAlignment="Top"/>
         <TextBlock x:Name="lblTiempoTotal" HorizontalAlignment="Left" Margin="491,107,0,0" TextWrapping="Wrap" Text="00:00" VerticalAlignment="Top" TextAlignment="Right"/>
         <Slider x:Name="sldVolumen" HorizontalAlignment="Left" Margin="764,25,0,0" VerticalAlignment="Top" Orientation="Vertical" Height="125"/>
         <TextBlock HorizontalAlignment="Left" Margin="710,31,0,0" TextWrapping="Wrap" Text="Volumen:" VerticalAlignment="Top"/>
         <TextBlock x:Name="lblPorcentajeVolumen" HorizontalAlignment="Left" Margin="710,134,0,0" TextWrapping="Wrap" Text="0 %" VerticalAlignment="Top" Width="49" TextAlignment="Right"/>
+        <ComboBox x:Name="cbSalida" HorizontalAlignment="Left" Margin="250,59,0,0" VerticalAlignment="Top" Width="349" RenderTransformOrigin="0.122,-0.073"/>
 
     </Grid>
 </Window>
