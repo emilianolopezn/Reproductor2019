@@ -32,6 +32,9 @@ namespace Reproductor
         WaveOutEvent output;
 
         DispatcherTimer timer;
+        VolumeSampleProvider volume;
+        FadeInOutSampleProvider fades;
+        bool fadingOut = false;
 
         bool dragging = false;
 
@@ -104,6 +107,14 @@ namespace Reproductor
             {
                 reader =
                     new AudioFileReader(txtRutaArchivo.Text);
+
+                fades = new FadeInOutSampleProvider(
+                    reader, true);
+                double milisegundosFadeIn =
+                    Double.Parse(txtDuracionFadeIn.Text)
+                        * 1000.0;
+                fades.BeginFadeIn(milisegundosFadeIn);
+                fadingOut = false;
                 output = new WaveOutEvent();
 
                 output.DeviceNumber =
@@ -111,7 +122,13 @@ namespace Reproductor
 
                 output.PlaybackStopped += Output_PlaybackStopped;
 
-                output.Init(reader);
+                volume =
+                    new VolumeSampleProvider(fades);
+
+                volume.Volume =
+                    (float) sldVolumen.Value;
+
+                output.Init(volume);
                 output.Play();
 
                 btnDetener.IsEnabled = true;
@@ -177,6 +194,39 @@ namespace Reproductor
             {
                 reader.CurrentTime =
                     TimeSpan.FromSeconds(sldReproduccion.Value);
+            }
+        }
+
+        private void sldVolumen_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            if (volume != null && output != null &&
+                output.PlaybackState != PlaybackState.Stopped)
+            {
+                volume.Volume =
+                    (float)sldVolumen.Value;
+                
+            }
+            if (lblPorcentajeVolumen != null)
+            {
+                lblPorcentajeVolumen.Text =
+                    ((int)(sldVolumen.Value * 100)).ToString()
+                    + " %";
+            }
+            
+        }
+
+        private void btnFadeOut_Click(object sender, RoutedEventArgs e)
+        {
+            if(!fadingOut &&
+                fades != null && output != null &&
+                output.PlaybackState == PlaybackState.Playing)
+            {
+                fadingOut = true;
+                double milisegundosFadeOut =
+                    Double.Parse(txtDuracionFadeOut.Text) *
+                    1000.0;
+                fades.BeginFadeOut(milisegundosFadeOut);
+
             }
         }
     }
